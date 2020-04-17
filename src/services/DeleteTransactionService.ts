@@ -1,5 +1,5 @@
-// import AppError from '../errors/AppError';
 import { getCustomRepository } from 'typeorm'
+import AppError from '../errors/AppError'
 import TransactionRepository from '../repositories/TransactionsRepository'
 
 interface Request {
@@ -13,7 +13,7 @@ class DeleteTransactionService {
     const transaction = await transactionRepository.findTransactionById(id)
 
     if (!transaction) {
-      throw new Error('Transação não encontrada')
+      throw new AppError('Transação não encontrada')
     }
 
     await transactionRepository.delete(id)

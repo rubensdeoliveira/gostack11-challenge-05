@@ -1,9 +1,9 @@
-// import AppError from '../errors/AppError';
-
 import { getCustomRepository } from 'typeorm'
 import Transaction from '../models/Transaction'
 import TransactionRepository from '../repositories/TransactionsRepository'
 import CategoryRepository from '../repositories/CategoriesRepository'
+
+import AppError from '../errors/AppError'
 
 interface Request {
   title: string
@@ -28,7 +28,7 @@ class CreateTransactionService {
     )
 
     if (!checkOperationPermission) {
-      throw new Error('Usuário não tem saldo para realizar essa operação')
+      throw new AppError('Usuário não tem saldo para realizar essa operação')
     }
 
     let categoryObj = await categoryRepository.getCategory(category)
