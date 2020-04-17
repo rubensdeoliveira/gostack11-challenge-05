@@ -40,6 +40,12 @@ class TransactionsRepository extends Repository<Transaction> {
 
     return true
   }
+
+  public async findTransactionById(id: string): Promise<Transaction | null> {
+    const transaction = await this.findOne(id)
+
+    return transaction || null
+  }
 }
 
 export default TransactionsRepository
