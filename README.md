@@ -1,23 +1,31 @@
 <img alt="GoStack" src="https://storage.googleapis.com/golden-wind/bootcamp-gostack/header-desafios.png" />
 
-<h3 align="center">
-  Desafio 05: Banco de dados e upload de arquivos no Node.js
-</h3>
+<h1 align="center">
+<br>
+Rocketseat - GoStack 11 - Challenge 05
+</h1>
 
 <p align="center">
-  <a href="#rocket-sobre-o-desafio">Sobre o desafio</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#memo-licença">Licença</a>
+This project was created to solve a challenge requested by Rocketseat.
+Gostack is immersive training in technologies, react and react natively.</p>
+
+<p align="center">
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License MIT">
+  </a>
 </p>
 
-## :rocket: Sobre o desafio
+<hr />
 
-Nesse desafio, você deve continuar desenvolvendo a aplicação de gestão de transações, treinando o que você aprendeu até agora no Node.js junto ao TypeScript, mas dessa vez incluindo o uso de banco de dados com o TypeORM e envio de arquivos com o Multer!
+## Features
 
-Essa será uma aplicação que deve armazenar transações financeiras de entrada e saída e permitir o cadastro e a listagem dessas transações, além de permitir a geração de relatórios a partir do envio de um arquivo csv.
+- Features can be accessed by routes below.
 
-### Rotas da aplicação
+- 💹 **Node Js** — A web framework for Node Js
 
-- **`POST /transactions`**: A rota deve receber `title`, `value`, `type`, e `category` dentro do corpo da requisição, sendo o `type` o tipo da transação, que deve ser `income` para entradas (depósitos) e `outcome` para saídas (retiradas). Ao cadastrar uma nova transação, ela deve ser armazenada dentro do seu banco de dados, possuindo os campos `id`, `title`, `value`, `type`, `category_id`, `created_at`, `updated_at`.
+### Routes
+
+- **`POST /transactions`**
 
 ```json
 {
@@ -29,7 +37,7 @@ Essa será uma aplicação que deve armazenar transações financeiras de entrad
 }
 ```
 
-- **`GET /transactions`**: Essa rota deve retornar uma listagem com todas as transações que você cadastrou até agora, junto com o valor da soma de entradas, retiradas e total de crédito. Essa rota deve retornar um objeto com o formato a seguir:
+- **`GET /transactions`**
 
 ```json
 {
@@ -83,30 +91,43 @@ Essa será uma aplicação que deve armazenar transações financeiras de entrad
 }
 ```
 
-- **`DELETE /transactions/:id`**: A rota deve deletar uma transação com o `id` presente nos parâmetros da rota;
+- **`DELETE /transactions/:id`**
 
-* **`POST /transactions/import`**: A rota deve permitir a importação de um arquivo com formato `.csv` contendo as mesmas informações necessárias para criação de uma transação `id`, `title`, `value`, `type`, `category_id`, `created_at`, `updated_at`, onde cada linha do arquivo CSV deve ser um novo registro para o banco de dados, e por fim retorne todas as `transactions` que foram importadas para seu banco de dados. O arquivo csv, deve seguir o seguinte [modelo](./assets/file.csv)
+* **`POST /transactions/import`**
 
-### Específicação dos testes
+import csv file like below:
+[modelo](./assets/file.csv)
 
-- **`should be able to create a new transaction`**: Para que esse teste passe, sua aplicação deve permitir que uma transação seja criada, e retorne um json com a transação criado.
+### Tests
 
-* **`should create tags when inserting new transactions`**: Para que esse teste passe, sua aplicação deve permitir que ao criar uma nova transação com uma categoria que não existe, essa seja criada e inserida no campo category_id da transação com o `id` que acabou de ser criado.
+- **`should be able to create a new transaction`**
 
-- **`should not create tags when they already exists`**: Para que esse teste passe, sua aplicação deve permitir que ao criar uma nova transação com uma categoria que já existe, seja atribuído ao campo category_id da transação com o `id` dessa categoria existente, não permitindo a criação de categorias com o mesmo `title`.
+* **`should create tags when inserting new transactions`**
 
-* **`should be able to list the transactions`**: Para que esse teste passe, sua aplicação deve permitir que seja retornado um array de objetos contendo todas as transações junto ao balanço de income, outcome e total das transações que foram criadas até o momento.
+- **`should not create tags when they already exists`**
 
-- **`should not be able to create outcome transaction without a valid balance`**: Para que esse teste passe, sua aplicação não deve permitir que uma transação do tipo `outcome` extrapole o valor total que o usuário tem em caixa (total de income), retornando uma resposta com código HTTP 400 e uma mensagem de erro no seguinte formato: `{ error: string }`.
+* **`should be able to list the transactions`**
 
-* **`should be able to delete a transaction`**: Para que esse teste passe, você deve permitir que a sua rota de delete exclua uma transação, e ao fazer a exclusão, ele retorne uma resposta vazia, com status 204.
+- **`should not be able to create outcome transaction without a valid balance`**
 
-- **`should be able to import transactions`**: Para que esse teste passe, sua aplicação deve permitir que seja importado um arquivo csv, contendo o seguinte [modelo](./assets/file.csv). Com o arquivo importado, você deve permitir que seja criado no banco de dados todos os registros e categorias que estavam presentes nesse arquivo, e retornar todas as transactions que foram importadas.
+* **`should be able to delete a transaction`**
 
-## :memo: Licença
+- **`should be able to import transactions`**
 
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
+## Getting started
+
+- Clone project > enter the project folder
+- run `yarn`
+- run `docker run --name dbimage -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres`
+- Acess postbird or another postgres manager and create db with any name.
+- Configure db credentials in src > config > database.js.
+- run `yarn typeorm migration:run`
+- run `yarn dev`
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](https://opensource.org/licenses/MIT) page for details.
 
 ---
 
-Feito com 💜 by me
+Created with passion by me 👨🏻‍💻
