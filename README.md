@@ -122,7 +122,7 @@ import csv file like below:
 - Acess postbird or another postgres manager and create db with any name.
 - Configure db credentials in src > config > database.js.
 - run `yarn typeorm migration:run`
-- run `yarn dev`
+- run `yarn dev:server`
 
 ## License
 
